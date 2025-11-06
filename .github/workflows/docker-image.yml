@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CI - Django
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build Docker image
-        run: docker build -t hello-devops .
+        run: docker build -t django-devops .
 
       - name: List Docker images
         run: docker images
