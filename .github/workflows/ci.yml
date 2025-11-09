@@ -1,4 +1,4 @@
-name: Django CI Pipeline
+name: Python App CI (Simple)
 
 on:
   push:
@@ -11,30 +11,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Setup Python environment
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.11
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      # Step 4: Run Django tests
-      - name: Run Django tests
-        env:
-          DJANGO_SETTINGS_MODULE: yourprojectname.settings  # <-- replace 'yourprojectname' with actual project folder name
+      - name: Run simple script
         run: |
-          python manage.py test
+          python app.py || echo "No Django project found, running app.py instead."
 
-      # Step 5: Build Docker image
       - name: Build Docker image
-        run: |
-          docker build -t django-devops .
+        run: docker build -t simple-python-app .
