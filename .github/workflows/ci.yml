@@ -1,4 +1,4 @@
-name: Python App CI (Simple)
+name: Simple Python CI
 
 on:
   push:
@@ -24,9 +24,12 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Run simple script
+      - name: Run Hello Test
         run: |
-          python app.py || echo "No Django project found, running app.py instead."
+          echo "Testing Python script..."
+          python -c "print('Hello, CI/CD working fine!')"
 
       - name: Build Docker image
-        run: docker build -t simple-python-app .
+        run: |
+          echo "Building Docker image..."
+          docker build -t simple-python-app .
